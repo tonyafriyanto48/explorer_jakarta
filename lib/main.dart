@@ -1,6 +1,9 @@
 import 'package:explore_jakarta/screen/welcome_screen.dart';
+import 'package:explore_jakarta/widget/stategird.dart';
 import 'package:flutter/material.dart';
 import 'package:explore_jakarta/screen/welcome_screen.dart';
+import 'package:explore_jakarta/screen/profile_screen.dart';
+import 'package:explore_jakarta/screen/detail_product.dart';
 
 void main() {
   runApp(MyApp());

@@ -1,8 +1,10 @@
+import 'package:explore_jakarta/screen/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:explore_jakarta/screen/jelajah_page.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:explore_jakarta/screen/profile_screen.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({Key? key}) : super(key: key);
@@ -48,7 +50,12 @@ class _HomescreenState extends State<Homescreen> {
             icon: Icon(
               Icons.account_circle,
             ),
-            onPressed: () {},
+           onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) =>  ProfileDetails()),
+              );
+            }
           ),
         ],
         leading: IconButton(

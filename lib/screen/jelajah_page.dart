@@ -1,9 +1,11 @@
+import 'package:explore_jakarta/screen/detail_product.dart';
 import 'package:flutter/material.dart';
 import 'package:explore_jakarta/screen/home_screen.dart';
 import 'package:explore_jakarta/screen/login_screen.dart';
 import 'package:explore_jakarta/screen/register_screen.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:explore_jakarta/screen/profile_screen.dart';
 
 class JelajahPage extends StatefulWidget {
   const JelajahPage({Key? key}) : super(key: key);
@@ -44,12 +46,22 @@ class _JelajahPageState extends State<JelajahPage> {
             icon: Icon(
               Icons.account_circle,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) =>  ProfileDetails()),
+              );
+            }
           ),
         ],
         leading: IconButton(
           icon: Image.asset('assets/logotmii2.png'),
-          onPressed: () {},
+          onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) =>  ProfileDetails()),
+              );
+            }
         ),
       ),
 
@@ -113,7 +125,10 @@ class _JelajahPageState extends State<JelajahPage> {
                             ),
                             SizedBox(height: 15),
                             InkWell(
-                              onTap: () {},
+                              onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => DetailPage()));
+          },
                               child: Container(
                                 margin: const EdgeInsets.all(5),
                                 padding: EdgeInsets.all(8.0),

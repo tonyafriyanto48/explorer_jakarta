@@ -8,7 +8,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:explore_jakarta/screen/profile_screen.dart';
 
 class JelajahPage extends StatefulWidget {
-  const JelajahPage({Key? key}) : super(key: key);
+  const JelajahPage();
 
   @override
   _JelajahPageState createState() => _JelajahPageState();

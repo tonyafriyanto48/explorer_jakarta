@@ -2,8 +2,15 @@ import 'package:explore_jakarta/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:explore_jakarta/screen/welcome_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileDetails extends StatelessWidget {
+
+    Future<void> deleteToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove("token");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -315,44 +322,50 @@ class ProfileDetails extends StatelessWidget {
         
         
         GestureDetector(
-                      onTap: () => Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => welcomepage(),
-                        ),
-                      ),
+                      onTap: () {
+                        print("gesture exit");
+                        deleteToken();
+                        Future.delayed(const Duration(milliseconds: 500), () {
+            Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => welcomepage(),
+                                  ),
+                                );
+                        });
+            
+                      },
         
           
-          child: Container(
-          
-            margin: EdgeInsets.only(left: 30.0, right: 30.0, top: 20.0, bottom: 40.0),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(5)),
-                                  boxShadow: <BoxShadow>[
-                                    BoxShadow(
-                                        color: Colors.grey.shade200,
-                                        offset: Offset(2, 4),
-                                        blurRadius: 5,
-                                        spreadRadius: 2)
-                                  ],
-                                  gradient: LinearGradient(
-                                    begin: Alignment.centerLeft,
-                                    end: Alignment.centerRight,
-                                    colors: [
-                                      Color.fromARGB(255, 121, 5, 5),
-                                      Color.fromARGB(255, 241, 50, 50),
-                                    ],
+          child:Container(
+                  width: 200,
+                  height: 45,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: Color.fromARGB(255, 2, 59, 248),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    onPressed: () async {
+                      print("on tap exit");
+                          final prefs = await SharedPreferences.getInstance();
+    await prefs.remove("token");
+    Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => welcomepage(),
                                   ),
-                                ),
-                                
-                                child: Text(
-                                  'Keluar',
-                                  style: TextStyle(
-                                      fontSize: 20, color: Colors.white),
-                                ),
-                              ),
+                                );
+                    },
+                    child: Text(
+                      "Keluar",
+                      style: TextStyle(
+                        color: Color(0xffffffff),
+                      ),
+                    ),
+                  ),
+                ),
                     ),
         
         ] 

@@ -1,5 +1,8 @@
+import 'package:explore_jakarta/respons/daftardao.dart';
 import 'package:flutter/material.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
+import 'package:dio/dio.dart';
+import 'dart:convert';
 //tes commit
 
 OutlineInputBorder myinputborder() {
@@ -31,6 +34,37 @@ class _RegisterPageState extends State<RegisterPage> {
   bool rememberMe = false;
 // this bool will check rememberMe is checked
   bool showErrorMessage = false;
+
+  
+  String email = "";
+  String username = "";
+  String password = "";
+  String repassword = "";
+
+
+Future<DaftarDAO> sendData(String email, String password, String repassword, String username) async {
+    var formData = FormData.fromMap({
+      'email': email,
+      'pass': password,
+    });
+    var response =
+        await Dio().post('https://api.my.id/ej/daftar.php', data: formData);
+    print(response.data);
+    print(response.statusCode);
+        if (response.statusCode == 200) {
+          // If the server did return a 201 CREATED response,
+          // then parse the JSON.
+          var data = DaftarDAO.fromJson(jsonDecode(response.data));
+
+      return data;
+       } 
+       else {
+      // If the server did not return a 201 CREATED response,
+      // then throw an exception.
+         throw Exception('Failed to create album.');
+  }
+  }
+
 
 //for form Validation
   final _formKey = GlobalKey<FormState>();
@@ -105,6 +139,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         //   height: 10,
                         // ),
                         TextField(
+                          onChanged: (text) {
+                            email = text;
+                          },
                             decoration: InputDecoration(
                           prefixIcon: Icon(Icons.email_outlined),
                           border: myinputborder(),
@@ -135,6 +172,9 @@ class _RegisterPageState extends State<RegisterPage> {
                           //   height: 10,
                           // ),
                           TextField(
+                          onChanged: (text) {
+                            username = text;
+                          },
                               decoration: InputDecoration(
                             prefixIcon: Icon(Icons.account_circle_outlined),
                             border: myinputborder(),
@@ -165,6 +205,9 @@ class _RegisterPageState extends State<RegisterPage> {
                             //   height: 10,
                             // ),
                             TextField(
+                            onChanged: (text) {
+                            password = text;
+                          },
                                 decoration: InputDecoration(
                               prefixIcon: Icon(Icons.https_outlined),
                               border: myinputborder(),
@@ -196,7 +239,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                 // SizedBox(
                                 //   height: 10,
                                 // ),
-                                TextField(
+                                TextField(  
+                          onChanged: (text) {
+                            repassword = text;
+                          },
                                     decoration: InputDecoration(
                                   prefixIcon: Icon(Icons.lock_clock_outlined),
                                   border: myinputborder(),
@@ -278,6 +324,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     child: InkWell(
                                       onTap: () {
                                         print("google tapped");
+                                       
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
@@ -340,8 +387,26 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                               ),
                               onPressed: () {
+
+                                print("daftar");
+                                var response = sendData(email,password);
+
+
+                                response.then((result) {
+                                  if ((result.token ?? "") != "") {
+
+                                  Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => Homescreen(),
+                                          ),
+                                        );
+                                  } else {
+                                    _onAlertButtonPressed(context);
+                                  }
+                              });
                                 // for your form validation
-                                if (_formKey.currentState!.validate()) {
+                                if (_formKey.currentState?.validate() ?? false) {
                                   // do your success operation here!
                                   // checking for the rememberValue
                                   // and setting the message bool data

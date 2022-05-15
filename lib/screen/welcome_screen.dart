@@ -2,15 +2,41 @@ import 'package:flutter/material.dart';
 import 'package:explore_jakarta/screen/home_screen.dart';
 import 'package:explore_jakarta/screen/login_screen.dart';
 import 'package:explore_jakarta/screen/register_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:explore_jakarta/screen/profile_screen.dart';
 
 class welcomepage extends StatefulWidget {
-  const welcomepage({Key? key}) : super(key: key);
+  const welcomepage();
 
   @override
   _welcomepage createState() => _welcomepage();
+
 }
 
+
 class _welcomepage extends State<welcomepage> {
+
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
+  @override
+  void initState() {
+    super.initState();
+    checkToken();
+  }
+
+  Future<void> checkToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    final String? token = prefs.getString('token');
+    print("token $token");
+    if ((token ?? "") != "") {
+       Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Homescreen(),
+                                  ),
+                                );
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

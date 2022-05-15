@@ -2,6 +2,15 @@ import 'package:explore_jakarta/screen/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:explore_jakarta/screen/home_screen.dart';
+import 'package:http/http.dart' as http;
+import 'package:explore_jakarta/respons/logindao.dart';
+import 'package:convert/convert.dart';
+import 'dart:convert';
+import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:async/async.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 OutlineInputBorder myinputborder() {
   //return type is OutlineInputBorder
@@ -23,29 +32,143 @@ OutlineInputBorder myfocusborder() {
       ));
 }
 
+
+
+  // print(response.statusCode);
+  // if (response.statusCode == 200) {
+  //   // If the server did return a 201 CREATED response,
+  //   // then parse the JSON.
+  //   var data = logindao.fromJson(jsonDecode(response.body));
+  //   print("token ${data.token}");
+  //   print("token ${data.status}");
+  //   return data;
+  // } else {
+  //   // If the server did not return a 201 CREATED response,
+  //   // then throw an exception.
+  //   throw Exception('Failed to create album.');
+  // }
+// }
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  String email = "";
+  String password = "";
+  Future<logindao>? _logindao;
+
+  Future<void> setToken(String token) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString("token", token);
+  }
+
+Future<logindao> sendData(String email, String password) async {
+    var formData = FormData.fromMap({
+      'email': email,
+      'pass': password,
+    });
+    var response =
+        await Dio().post('https://api.my.id/ej/masuk.php', data: formData);
+    print(response.data);
+    print(response.statusCode);
+        if (response.statusCode == 200) {
+          // If the server did return a 201 CREATED response,
+          // then parse the JSON.
+          var data = logindao.fromJson(jsonDecode(response.data));
+    print("token ${data.token}");
+    print("token ${data.status}");
+    setToken(data.token ?? "");
+
+      return data;
+       } 
+       else {
+      // If the server did not return a 201 CREATED response,
+      // then throw an exception.
+         throw Exception('Failed to create album.');
+  }
+  }
+
+   FutureBuilder<logindao> buildFutureBuilder() {
+    return FutureBuilder<logindao>(
+      future: _logindao,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          //return Text(snapshot.data!.title);
+          if (snapshot.data!.token != null) {
+            print("masuk sini pindah route");
+           Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Homescreen(),
+                                  ),
+                                );
+          }
+        } else if (snapshot.hasError) {
+          print("error snapshit");
+        }
+        
+
+        return const CircularProgressIndicator();
+      },
+    );
+  }
+
+   _onCustomAnimationAlertPressed(context) {
+    Alert(
+      context: context,
+      title: "RFLUTTER ALERT",
+      desc: "Flutter is more awesome with RFlutter Alert.",
+      alertAnimation: fadeAlertAnimation,
+    ).show();
+  }
+
+   Widget fadeAlertAnimation(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
+    return Align(
+      child: FadeTransition(
+        opacity: animation,
+        child: child,
+      ),
+
+    );
+  }
+
+   _onAlertButtonPressed(context) {
+    Alert(
+      context: context,
+      type: AlertType.error,
+      title: "Login Gagal",
+      desc: "silahkan masukan ulang email atau kata sandi anda",
+      buttons: [
+        DialogButton(
+          child: Text(
+            "Oke",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+          onPressed: () {
+             Navigator.of(context).pop();
+          },
+          width: 120,
+        )
+      ],
+    ).show();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: new Text('Explore Jakarta'),
         actions: [
-          // action button
-          // IconButton(
-          //   icon: Icon(Icons.campaign),
-          //   onPressed: () {},
-          // ),
-          // IconButton(
-          //   icon: Icon(
-          //     Icons.account_circle,
-          //   ),
-          //   onPressed: () {},
-          // ),
         ],
         leading: IconButton(
           icon: Image.asset('assets/logotmii2.png'),
@@ -73,27 +196,17 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       height: 20,
                     ),
-                    // Image.asset(
-                    //   'assets/images/accent.png',
-                    //   width: 99,
-                    //   height: 4,
-                    // ),
-                    Column(
+                     Column(
                       children: <Widget>[
                         Container(
                           margin: EdgeInsets.symmetric(vertical: 10),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              // Text(
-                              //   "Username",
-                              //   style: TextStyle(
-                              //       fontWeight: FontWeight.bold, fontSize: 15),
-                              // ),
-                              // SizedBox(
-                              //   height: 10,
-                              // ),
-                              TextField(
+                                                        TextField(
+                                                          onChanged: (text) {
+                                                            email = text;
+                                                          },
                                   decoration: InputDecoration(
                                 prefixIcon: Icon(Icons.people),
                                 border: myinputborder(),
@@ -115,15 +228,10 @@ class _LoginPageState extends State<LoginPage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              // Text(
-                              //   "Password",
-                              //   style: TextStyle(
-                              //       fontWeight: FontWeight.bold, fontSize: 15),
-                              // ),
-                              // SizedBox(
-                              //   height: 10,
-                              // ),
-                              TextField(
+                                                    TextField(
+                                                      onChanged: (text) {
+                                                        password = text;
+                                                      },
                                   obscureText: true,
                                   decoration: InputDecoration(
                                     prefixIcon: Icon(Icons.lock),
@@ -223,12 +331,25 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     SizedBox(height: 20),
                     GestureDetector(
-                      onTap: () => Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Homescreen(),
-                        ),
-                      ),
+                      onTap: () {
+                        var response = sendData(email,password);
+                        _logindao = response;
+
+
+                        response.then((result) {
+                          if ((result.token ?? "") != "") {
+
+                           Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Homescreen(),
+                                  ),
+                                );
+                          } else {
+                            _onAlertButtonPressed(context);
+                          }
+                      });
+                      },
                       child: Container(
                         width: MediaQuery.of(context).size.width,
                         padding: EdgeInsets.symmetric(vertical: 15),

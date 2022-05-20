@@ -389,21 +389,21 @@ Future<DaftarDAO> sendData(String email, String password, String repassword, Str
                               onPressed: () {
 
                                 print("daftar");
-                                var response = sendData(email,password);
+                                var response = sendData(email,password,"","");
 
 
                                 response.then((result) {
-                                  if ((result.token ?? "") != "") {
+                                  // if ((result.token ?? "") != "") {
 
-                                  Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => Homescreen(),
-                                          ),
-                                        );
-                                  } else {
-                                    _onAlertButtonPressed(context);
-                                  }
+                                  // Navigator.pushReplacement(
+                                  //         context,
+                                  //         MaterialPageRoute(
+                                  //           builder: (context) => Homescreen(),
+                                  //         ),
+                                  //       );
+                                  // } else {
+                                  //   _onAlertButtonPressed(context);
+                                  // }
                               });
                                 // for your form validation
                                 if (_formKey.currentState?.validate() ?? false) {

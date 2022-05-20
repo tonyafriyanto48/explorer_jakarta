@@ -1,14 +1,69 @@
+import 'package:explore_jakarta/respons/getprofiledao.dart';
 import 'package:explore_jakarta/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:explore_jakarta/screen/welcome_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:explore_jakarta/respons/logindao.dart';
+import 'package:convert/convert.dart';
+import 'dart:convert';
+import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:async/async.dart';
 
-class ProfileDetails extends StatelessWidget {
+class ProfileDetails extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _ProfileDetails();
+  }
+}
+
+class _ProfileDetails extends State<ProfileDetails> {
 
     Future<void> deleteToken() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove("token");
+  }
+
+      var id = "";
+      var name = "";
+      var email = "";
+      var password = "";
+      var tanggallahir = "";
+      var handphone = "";
+      var kelamin = "";
+
+  @override
+  void initState() {
+    getProfile();
+  }
+
+
+Future<GetProfile> getProfile() async {
+  print("get profile");
+    final prefs = await SharedPreferences.getInstance();
+    final String token = prefs.getString('token') ?? "";
+    var response =
+        await Dio().get('https://api.my.id/ej/profile.php?token=${token}');
+    print(response.data);
+    print(response.statusCode);
+        if (response.statusCode == 200) {
+          var profileData = GetProfile.fromJson(jsonDecode(response.data));
+          setState(() {
+          id = profileData.data!.id!;
+          name = profileData.data!.name!;
+          email = profileData.data!.email!;
+          tanggallahir = profileData.data!.tanggallahir!;
+          handphone = profileData.data!.handphone!;
+          kelamin = profileData.data!.kelamin!;
+            
+          });
+          
+          return profileData;
+       } 
+       else {
+         throw Exception('Failed to create album.');
+  }
   }
 
   @override
@@ -150,7 +205,7 @@ class ProfileDetails extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 37.0),
                 child: Text(
-                  'Tony Afiyanto',
+                  '${name}',
                   style: GoogleFonts.lato(
                       color: Colors.grey[600],
                       fontSize: 14,
@@ -163,7 +218,6 @@ class ProfileDetails extends StatelessWidget {
           SizedBox(
             height: 30,
           ),
-        
           Row(
             children: [
               Padding(
@@ -180,7 +234,7 @@ class ProfileDetails extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 14.0),
                 child: Text(
-                  'Laki Laki',
+                  '${kelamin}',
                   style: GoogleFonts.lato(
                       color: Colors.grey[600],
                       fontSize: 14,
@@ -209,7 +263,7 @@ class ProfileDetails extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 14.0),
                 child: Text(
-                  '  28 April 1998',
+                  '${tanggallahir}',
                   style: GoogleFonts.lato(
                       color: Colors.grey[600],
                       fontSize: 14,
@@ -262,7 +316,7 @@ class ProfileDetails extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 8.0),
                 child: Text(
-                  'Example@email.com',
+                  '${email}',
                   style: GoogleFonts.lato(
                       color: Colors.grey[700],
                       fontSize: 14,
@@ -285,7 +339,7 @@ class ProfileDetails extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 8.0),
                 child: Text(
-                  '+62 - 896542323',
+                  '${email}',
                   style: GoogleFonts.lato(
                       color: Colors.grey[700],
                       fontSize: 14,
@@ -308,7 +362,7 @@ class ProfileDetails extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 8.0),
                 child: Text(
-                  'Cikupa Kabupaten Tangerang 15710',
+                  '${email}',
                   style: GoogleFonts.lato(
                       color: Colors.grey[700],
                       fontSize: 14,
@@ -372,4 +426,15 @@ class ProfileDetails extends StatelessWidget {
       ),
     );
   }
+
+  // @override
+  // State<StatefulWidget> createState() {
+    // TODO: implement createState
+
+  // }
+
+  // @override
+  // State<StatefulWidget> createState() {
+  //   // TODO: implement createState
+  //   GetProfile();
 }

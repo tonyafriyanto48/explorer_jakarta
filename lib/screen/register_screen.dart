@@ -1,3 +1,4 @@
+import 'package:explore_jakarta/constant.dart';
 import 'package:explore_jakarta/respons/daftardao.dart';
 import 'package:flutter/material.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
@@ -48,7 +49,7 @@ Future<DaftarDAO> sendData(String email, String password, String repassword, Str
       'pass': password,
     });
     var response =
-        await Dio().post('https://api.my.id/ej/daftar.php', data: formData);
+        await Dio().post('${urlRoot}/daftar.php', data: formData);
     print(response.data);
     print(response.statusCode);
         if (response.statusCode == 200) {

@@ -1,3 +1,4 @@
+import 'package:explore_jakarta/constant.dart';
 import 'package:explore_jakarta/screen/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
@@ -73,7 +74,7 @@ Future<logindao> sendData(String email, String password) async {
       'pass': password,
     });
     var response =
-        await Dio().post('https://api.my.id/ej/masuk.php', data: formData);
+        await Dio().post('${urlRoot}/masuk.php', data: formData);
     print(response.data);
     print(response.statusCode);
         if (response.statusCode == 200) {

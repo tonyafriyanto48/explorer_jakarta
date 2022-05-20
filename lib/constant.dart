@@ -10,3 +10,5 @@ const kPrimaryGradientColor = LinearGradient(
 );
 const kSecondaryColor = Color(0xFF979797);
 const kTextColor = Color(0xFF757575);
+
+const urlRoot = "https://api.my.id/ej";

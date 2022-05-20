@@ -1,3 +1,4 @@
+import 'package:explore_jakarta/constant.dart';
 import 'package:explore_jakarta/respons/getprofiledao.dart';
 import 'package:explore_jakarta/screen/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +45,7 @@ Future<GetProfile> getProfile() async {
     final prefs = await SharedPreferences.getInstance();
     final String token = prefs.getString('token') ?? "";
     var response =
-        await Dio().get('https://api.my.id/ej/profile.php?token=${token}');
+        await Dio().get('${urlRoot}/profile.php?token=${token}');
     print(response.data);
     print(response.statusCode);
         if (response.statusCode == 200) {

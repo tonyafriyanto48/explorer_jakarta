@@ -43,26 +43,24 @@ class _JelajahPageState extends State<JelajahPage> {
             onPressed: () {},
           ),
           IconButton(
-            icon: Icon(
-              Icons.account_circle,
-            ),
+              icon: Icon(
+                Icons.account_circle,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProfileDetails()),
+                );
+              }),
+        ],
+        leading: IconButton(
+            icon: Image.asset('assets/logotmii2.png'),
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) =>  ProfileDetails()),
+                MaterialPageRoute(builder: (context) => ProfileDetails()),
               );
-            }
-          ),
-        ],
-        leading: IconButton(
-          icon: Image.asset('assets/logotmii2.png'),
-          onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) =>  ProfileDetails()),
-              );
-            }
-        ),
+            }),
       ),
 
       body: SafeArea(
@@ -126,9 +124,11 @@ class _JelajahPageState extends State<JelajahPage> {
                             SizedBox(height: 15),
                             InkWell(
                               onTap: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => DetailPage()));
-          },
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DetailPage()));
+                              },
                               child: Container(
                                 margin: const EdgeInsets.all(5),
                                 padding: EdgeInsets.all(8.0),

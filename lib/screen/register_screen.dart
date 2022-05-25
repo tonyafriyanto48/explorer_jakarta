@@ -36,36 +36,32 @@ class _RegisterPageState extends State<RegisterPage> {
 // this bool will check rememberMe is checked
   bool showErrorMessage = false;
 
-  
   String email = "";
   String username = "";
   String password = "";
   String repassword = "";
 
-
-Future<DaftarDAO> sendData(String email, String password, String repassword, String username) async {
+  Future<DaftarDAO> sendData(
+      String email, String password, String repassword, String username) async {
     var formData = FormData.fromMap({
       'email': email,
       'pass': password,
     });
-    var response =
-        await Dio().post('${urlRoot}/daftar.php', data: formData);
+    var response = await Dio().post('${urlRoot}/daftar.php', data: formData);
     print(response.data);
     print(response.statusCode);
-        if (response.statusCode == 200) {
-          // If the server did return a 201 CREATED response,
-          // then parse the JSON.
-          var data = DaftarDAO.fromJson(jsonDecode(response.data));
+    if (response.statusCode == 200) {
+      // If the server did return a 201 CREATED response,
+      // then parse the JSON.
+      var data = DaftarDAO.fromJson(jsonDecode(response.data));
 
       return data;
-       } 
-       else {
+    } else {
       // If the server did not return a 201 CREATED response,
       // then throw an exception.
-         throw Exception('Failed to create album.');
+      throw Exception('Failed to create album.');
+    }
   }
-  }
-
 
 //for form Validation
   final _formKey = GlobalKey<FormState>();
@@ -140,21 +136,22 @@ Future<DaftarDAO> sendData(String email, String password, String repassword, Str
                         //   height: 10,
                         // ),
                         TextField(
-                          onChanged: (text) {
-                            email = text;
-                          },
+                            onChanged: (text) {
+                              email = text;
+                            },
                             decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.email_outlined),
-                          border: myinputborder(),
-                          enabledBorder: myinputborder(),
-                          focusedBorder: myfocusborder(),
-                          // labelText: "Password",
-                          hintText: "Email",
-                          // If  you are using latest version of flutter then lable text and hint text shown like this
-                          // if you r using flutter less then 1.20.* then maybe this is not working properly
-                          floatingLabelBehavior: FloatingLabelBehavior.always,
-                          //suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
-                        )),
+                              prefixIcon: Icon(Icons.email_outlined),
+                              border: myinputborder(),
+                              enabledBorder: myinputborder(),
+                              focusedBorder: myfocusborder(),
+                              // labelText: "Password",
+                              hintText: "Email",
+                              // If  you are using latest version of flutter then lable text and hint text shown like this
+                              // if you r using flutter less then 1.20.* then maybe this is not working properly
+                              floatingLabelBehavior:
+                                  FloatingLabelBehavior.always,
+                              //suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
+                            )),
                       ],
                     ),
                   ),
@@ -173,21 +170,22 @@ Future<DaftarDAO> sendData(String email, String password, String repassword, Str
                           //   height: 10,
                           // ),
                           TextField(
-                          onChanged: (text) {
-                            username = text;
-                          },
+                              onChanged: (text) {
+                                username = text;
+                              },
                               decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.account_circle_outlined),
-                            border: myinputborder(),
-                            enabledBorder: myinputborder(),
-                            focusedBorder: myfocusborder(),
-                            // labelText: "Password",
-                            hintText: "username",
-                            // If  you are using latest version of flutter then lable text and hint text shown like this
-                            // if you r using flutter less then 1.20.* then maybe this is not working properly
-                            floatingLabelBehavior: FloatingLabelBehavior.always,
-                            //suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
-                          )),
+                                prefixIcon: Icon(Icons.account_circle_outlined),
+                                border: myinputborder(),
+                                enabledBorder: myinputborder(),
+                                focusedBorder: myfocusborder(),
+                                // labelText: "Password",
+                                hintText: "username",
+                                // If  you are using latest version of flutter then lable text and hint text shown like this
+                                // if you r using flutter less then 1.20.* then maybe this is not working properly
+                                floatingLabelBehavior:
+                                    FloatingLabelBehavior.always,
+                                //suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
+                              )),
                         ],
                       ),
                     ),
@@ -206,22 +204,22 @@ Future<DaftarDAO> sendData(String email, String password, String repassword, Str
                             //   height: 10,
                             // ),
                             TextField(
-                            onChanged: (text) {
-                            password = text;
-                          },
+                                onChanged: (text) {
+                                  password = text;
+                                },
                                 decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.https_outlined),
-                              border: myinputborder(),
-                              enabledBorder: myinputborder(),
-                              focusedBorder: myfocusborder(),
-                              // labelText: "Password",
-                              hintText: "Password",
-                              // If  you are using latest version of flutter then lable text and hint text shown like this
-                              // if you r using flutter less then 1.20.* then maybe this is not working properly
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.always,
-                              //suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
-                            )),
+                                  prefixIcon: Icon(Icons.https_outlined),
+                                  border: myinputborder(),
+                                  enabledBorder: myinputborder(),
+                                  focusedBorder: myfocusborder(),
+                                  // labelText: "Password",
+                                  hintText: "Password",
+                                  // If  you are using latest version of flutter then lable text and hint text shown like this
+                                  // if you r using flutter less then 1.20.* then maybe this is not working properly
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.always,
+                                  //suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
+                                )),
                           ],
                         ),
                       ),
@@ -240,23 +238,24 @@ Future<DaftarDAO> sendData(String email, String password, String repassword, Str
                                 // SizedBox(
                                 //   height: 10,
                                 // ),
-                                TextField(  
-                          onChanged: (text) {
-                            repassword = text;
-                          },
+                                TextField(
+                                    onChanged: (text) {
+                                      repassword = text;
+                                    },
                                     decoration: InputDecoration(
-                                  prefixIcon: Icon(Icons.lock_clock_outlined),
-                                  border: myinputborder(),
-                                  enabledBorder: myinputborder(),
-                                  focusedBorder: myfocusborder(),
-                                  // labelText: "Password",
-                                  hintText: "Masukan Ulang Password",
-                                  // If  you are using latest version of flutter then lable text and hint text shown like this
-                                  // if you r using flutter less then 1.20.* then maybe this is not working properly
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.always,
-                                  //suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
-                                )),
+                                      prefixIcon:
+                                          Icon(Icons.lock_clock_outlined),
+                                      border: myinputborder(),
+                                      enabledBorder: myinputborder(),
+                                      focusedBorder: myfocusborder(),
+                                      // labelText: "Password",
+                                      hintText: "Masukan Ulang Password",
+                                      // If  you are using latest version of flutter then lable text and hint text shown like this
+                                      // if you r using flutter less then 1.20.* then maybe this is not working properly
+                                      floatingLabelBehavior:
+                                          FloatingLabelBehavior.always,
+                                      //suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
+                                    )),
                               ],
                             ),
                           ),
@@ -325,7 +324,6 @@ Future<DaftarDAO> sendData(String email, String password, String repassword, Str
                                     child: InkWell(
                                       onTap: () {
                                         print("google tapped");
-                                       
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
@@ -388,10 +386,9 @@ Future<DaftarDAO> sendData(String email, String password, String repassword, Str
                                 ),
                               ),
                               onPressed: () {
-
                                 print("daftar");
-                                var response = sendData(email,password,"","");
-
+                                var response =
+                                    sendData(email, password, "", "");
 
                                 response.then((result) {
                                   // if ((result.token ?? "") != "") {
@@ -405,9 +402,10 @@ Future<DaftarDAO> sendData(String email, String password, String repassword, Str
                                   // } else {
                                   //   _onAlertButtonPressed(context);
                                   // }
-                              });
+                                });
                                 // for your form validation
-                                if (_formKey.currentState?.validate() ?? false) {
+                                if (_formKey.currentState?.validate() ??
+                                    false) {
                                   // do your success operation here!
                                   // checking for the rememberValue
                                   // and setting the message bool data

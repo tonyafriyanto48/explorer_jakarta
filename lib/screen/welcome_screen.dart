@@ -10,12 +10,9 @@ class welcomepage extends StatefulWidget {
 
   @override
   _welcomepage createState() => _welcomepage();
-
 }
 
-
 class _welcomepage extends State<welcomepage> {
-
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   @override
@@ -29,14 +26,15 @@ class _welcomepage extends State<welcomepage> {
     final String? token = prefs.getString('token');
     print("token $token");
     if ((token ?? "") != "") {
-       Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Homescreen(),
-                                  ),
-                                );
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Homescreen(),
+        ),
+      );
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

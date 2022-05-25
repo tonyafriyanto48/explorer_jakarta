@@ -47,16 +47,15 @@ class _HomescreenState extends State<Homescreen> {
             onPressed: () {},
           ),
           IconButton(
-            icon: Icon(
-              Icons.account_circle,
-            ),
-           onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) =>  ProfileDetails()),
-              );
-            }
-          ),
+              icon: Icon(
+                Icons.account_circle,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProfileDetails()),
+                );
+              }),
         ],
         leading: IconButton(
           icon: Image.asset('assets/logotmii2.png'),

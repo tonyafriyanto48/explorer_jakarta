@@ -16,7 +16,7 @@ class DetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context);
     return Scaffold(
-       appBar: AppBar(
+      appBar: AppBar(
         title: new Text('Explore Jakarta'),
         actions: [
           IconButton(
@@ -24,51 +24,49 @@ class DetailPage extends StatelessWidget {
             onPressed: () {},
           ),
           IconButton(
-            icon: Icon(
-              Icons.account_circle,
-            ),
-           onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) =>  ProfileDetails()),
-              );
-            }
-          ),
+              icon: Icon(
+                Icons.account_circle,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProfileDetails()),
+                );
+              }),
         ],
         leading: IconButton(
           icon: Image.asset('assets/logotmii2.png'),
           onPressed: () {},
         ),
       ),
-      body: 
-      
-      Stack(
-        
+      body: Stack(
         children: [
-           GridView.count(
-        crossAxisCount: 2,
-        children: <Widget>[
-          Container(
-            // color: Colors.yellowAccent,
-             // tambahkan property berikut
-            child: Center(
-              
-               child: Image.asset('assets/museum indonesia.jpg',
-               height: double.infinity,),
-            ),
+          GridView.count(
+            crossAxisCount: 2,
+            children: <Widget>[
+              Container(
+                // color: Colors.yellowAccent,
+                // tambahkan property berikut
+                child: Center(
+                  child: Image.asset(
+                    'assets/museum indonesia.jpg',
+                    height: double.infinity,
+                  ),
+                ),
+              ),
+              Container(
+                // color: Colors.blueAccent,
+                // height: double.infinity, // tambahkan property berikut
+                child: Center(
+                  child: Image.asset(
+                    'assets/museum indonesia kk.jpg',
+                    height: double.infinity,
+                  ),
+                ),
+              ),
+            ],
           ),
-          Container(
-            // color: Colors.blueAccent,
-            // height: double.infinity, // tambahkan property berikut
-            child: Center(
-             child: Image.asset('assets/museum indonesia kk.jpg',
-               height: double.infinity,),
-            ),
-          ),
-         
-        ],
-      ),
-    Positioned(
+          Positioned(
             left: 0,
             right: 0,
             bottom: 0,
@@ -88,7 +86,7 @@ class DetailPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                     FadeAnimation(
+                      FadeAnimation(
                         1.3,
                         Text(
                           'Muesum Indonesia',
@@ -117,32 +115,34 @@ class DetailPage extends StatelessWidget {
                         height: 20,
                       ),
                       InkWell(
-          onTap: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => JelajahPage()));
-          },
-          child: Container(
-            margin: EdgeInsets.symmetric(vertical: 5),
-            padding: EdgeInsets.all(5),
-            // alignment: Alignment.bottomCenter,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  'Selengkapnya ...',
-                  style: TextStyle(
-                      color: Color(0xFF0880F0),
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600),
-                ),
-              ],
-            ),
-          ),
-        ),
-                        const SizedBox(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => JelajahPage()));
+                        },
+                        child: Container(
+                          margin: EdgeInsets.symmetric(vertical: 5),
+                          padding: EdgeInsets.all(5),
+                          // alignment: Alignment.bottomCenter,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                'Selengkapnya ...',
+                                style: TextStyle(
+                                    color: Color(0xFF0880F0),
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
                         height: 20,
                       ),
-                                FadeAnimation(
+                      FadeAnimation(
                         1.5,
                         Container(
                           height: 60,

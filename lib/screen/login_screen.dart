@@ -33,21 +33,19 @@ OutlineInputBorder myfocusborder() {
       ));
 }
 
-
-
-  // print(response.statusCode);
-  // if (response.statusCode == 200) {
-  //   // If the server did return a 201 CREATED response,
-  //   // then parse the JSON.
-  //   var data = logindao.fromJson(jsonDecode(response.body));
-  //   print("token ${data.token}");
-  //   print("token ${data.status}");
-  //   return data;
-  // } else {
-  //   // If the server did not return a 201 CREATED response,
-  //   // then throw an exception.
-  //   throw Exception('Failed to create album.');
-  // }
+// print(response.statusCode);
+// if (response.statusCode == 200) {
+//   // If the server did return a 201 CREATED response,
+//   // then parse the JSON.
+//   var data = logindao.fromJson(jsonDecode(response.body));
+//   print("token ${data.token}");
+//   print("token ${data.status}");
+//   return data;
+// } else {
+//   // If the server did not return a 201 CREATED response,
+//   // then throw an exception.
+//   throw Exception('Failed to create album.');
+// }
 // }
 
 class LoginPage extends StatefulWidget {
@@ -56,8 +54,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
-
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   String email = "";
   String password = "";
@@ -68,33 +64,31 @@ class _LoginPageState extends State<LoginPage> {
     await prefs.setString("token", token);
   }
 
-Future<logindao> sendData(String email, String password) async {
+  Future<logindao> sendData(String email, String password) async {
     var formData = FormData.fromMap({
       'email': email,
       'pass': password,
     });
-    var response =
-        await Dio().post('${urlRoot}/masuk.php', data: formData);
+    var response = await Dio().post('${urlRoot}/masuk.php', data: formData);
     print(response.data);
     print(response.statusCode);
-        if (response.statusCode == 200) {
-          // If the server did return a 201 CREATED response,
-          // then parse the JSON.
-          var data = logindao.fromJson(jsonDecode(response.data));
-    print("token ${data.token}");
-    print("token ${data.status}");
-    setToken(data.token ?? "");
+    if (response.statusCode == 200) {
+      // If the server did return a 201 CREATED response,
+      // then parse the JSON.
+      var data = logindao.fromJson(jsonDecode(response.data));
+      print("token ${data.token}");
+      print("token ${data.status}");
+      setToken(data.token ?? "");
 
       return data;
-       } 
-       else {
+    } else {
       // If the server did not return a 201 CREATED response,
       // then throw an exception.
-         throw Exception('Failed to create album.');
-  }
+      throw Exception('Failed to create album.');
+    }
   }
 
-   FutureBuilder<logindao> buildFutureBuilder() {
+  FutureBuilder<logindao> buildFutureBuilder() {
     return FutureBuilder<logindao>(
       future: _logindao,
       builder: (context, snapshot) {
@@ -102,24 +96,23 @@ Future<logindao> sendData(String email, String password) async {
           //return Text(snapshot.data!.title);
           if (snapshot.data!.token != null) {
             print("masuk sini pindah route");
-           Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Homescreen(),
-                                  ),
-                                );
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Homescreen(),
+              ),
+            );
           }
         } else if (snapshot.hasError) {
           print("error snapshit");
         }
-        
 
         return const CircularProgressIndicator();
       },
     );
   }
 
-   _onCustomAnimationAlertPressed(context) {
+  _onCustomAnimationAlertPressed(context) {
     Alert(
       context: context,
       title: "RFLUTTER ALERT",
@@ -128,7 +121,7 @@ Future<logindao> sendData(String email, String password) async {
     ).show();
   }
 
-   Widget fadeAlertAnimation(
+  Widget fadeAlertAnimation(
     BuildContext context,
     Animation<double> animation,
     Animation<double> secondaryAnimation,
@@ -139,11 +132,10 @@ Future<logindao> sendData(String email, String password) async {
         opacity: animation,
         child: child,
       ),
-
     );
   }
 
-   _onAlertButtonPressed(context) {
+  _onAlertButtonPressed(context) {
     Alert(
       context: context,
       type: AlertType.error,
@@ -156,7 +148,7 @@ Future<logindao> sendData(String email, String password) async {
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
           onPressed: () {
-             Navigator.of(context).pop();
+            Navigator.of(context).pop();
           },
           width: 120,
         )
@@ -169,8 +161,7 @@ Future<logindao> sendData(String email, String password) async {
     return Scaffold(
       appBar: AppBar(
         title: new Text('Explore Jakarta'),
-        actions: [
-        ],
+        actions: [],
         leading: IconButton(
           icon: Image.asset('assets/logotmii2.png'),
           onPressed: () {},
@@ -197,30 +188,30 @@ Future<logindao> sendData(String email, String password) async {
                     SizedBox(
                       height: 20,
                     ),
-                     Column(
+                    Column(
                       children: <Widget>[
                         Container(
                           margin: EdgeInsets.symmetric(vertical: 10),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                                                        TextField(
-                                                          onChanged: (text) {
-                                                            email = text;
-                                                          },
+                              TextField(
+                                  onChanged: (text) {
+                                    email = text;
+                                  },
                                   decoration: InputDecoration(
-                                prefixIcon: Icon(Icons.people),
-                                border: myinputborder(),
-                                enabledBorder: myinputborder(),
-                                focusedBorder: myfocusborder(),
-                                // labelText: "Password",
-                                hintText: "Email",
-                                // If  you are using latest version of flutter then lable text and hint text shown like this
-                                // if you r using flutter less then 1.20.* then maybe this is not working properly
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.always,
-                                //suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
-                              )),
+                                    prefixIcon: Icon(Icons.people),
+                                    border: myinputborder(),
+                                    enabledBorder: myinputborder(),
+                                    focusedBorder: myfocusborder(),
+                                    // labelText: "Password",
+                                    hintText: "Email",
+                                    // If  you are using latest version of flutter then lable text and hint text shown like this
+                                    // if you r using flutter less then 1.20.* then maybe this is not working properly
+                                    floatingLabelBehavior:
+                                        FloatingLabelBehavior.always,
+                                    //suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
+                                  )),
                             ],
                           ),
                         ),
@@ -229,10 +220,10 @@ Future<logindao> sendData(String email, String password) async {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                                                    TextField(
-                                                      onChanged: (text) {
-                                                        password = text;
-                                                      },
+                              TextField(
+                                  onChanged: (text) {
+                                    password = text;
+                                  },
                                   obscureText: true,
                                   decoration: InputDecoration(
                                     prefixIcon: Icon(Icons.lock),
@@ -333,23 +324,21 @@ Future<logindao> sendData(String email, String password) async {
                     SizedBox(height: 20),
                     GestureDetector(
                       onTap: () {
-                        var response = sendData(email,password);
+                        var response = sendData(email, password);
                         _logindao = response;
-
 
                         response.then((result) {
                           if ((result.token ?? "") != "") {
-
-                           Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Homescreen(),
-                                  ),
-                                );
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Homescreen(),
+                              ),
+                            );
                           } else {
                             _onAlertButtonPressed(context);
                           }
-                      });
+                        });
                       },
                       child: Container(
                         width: MediaQuery.of(context).size.width,
@@ -403,7 +392,6 @@ Future<logindao> sendData(String email, String password) async {
                             )),
                       ],
                     ),
-
                     SizedBox(height: 10),
                   ],
                 ),

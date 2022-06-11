@@ -98,7 +98,7 @@ class _JelajahPageState extends State<JelajahPage> {
                     children: <Widget>[
                       AspectRatio(
                         aspectRatio: 18.0 / 11.0,
-                        child: Image.asset('assets/museum indonesia.jpg'),
+                        child: Image.asset('assets/museum Indonesia.jpg'),
                       ),
                       Padding(
                         padding:

@@ -163,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
         title: new Text('Explore Jakarta'),
         actions: [],
         leading: IconButton(
-          icon: Image.asset('assets/logotmii2.png'),
+          icon: Image.asset('assets/explore.png'),
           onPressed: () {},
         ),
       ),

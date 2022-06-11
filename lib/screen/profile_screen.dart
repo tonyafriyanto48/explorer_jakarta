@@ -84,7 +84,7 @@ class _ProfileDetails extends State<ProfileDetails> {
               }),
         ],
         leading: IconButton(
-          icon: Image.asset('assets/logotmii2.png'),
+          icon: Image.asset('assets/explore.png'),
           onPressed: () {},
         ),
       ),

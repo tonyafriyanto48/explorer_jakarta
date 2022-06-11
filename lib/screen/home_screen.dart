@@ -58,7 +58,7 @@ class _HomescreenState extends State<Homescreen> {
               }),
         ],
         leading: IconButton(
-          icon: Image.asset('assets/logotmii2.png'),
+          icon: Image.asset('assets/explore.png'),
           onPressed: () {},
         ),
       ),

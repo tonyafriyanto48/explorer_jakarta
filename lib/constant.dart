@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 const double kSpace = 10;
 const kPrimaryColor = Color(0xFF3366FF);
 const kPrimaryLightColor = Color(0xFF00CCFF);
+const kBoxDecorationStyle= Color.fromARGB(255, 143, 143, 143);
 const kPrimaryGradientColor = LinearGradient(
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,

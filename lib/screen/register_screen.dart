@@ -84,7 +84,7 @@ class _RegisterPageState extends State<RegisterPage> {
             // ),
           ],
           leading: IconButton(
-            icon: Image.asset('assets/logotmii2.png'),
+            icon: Image.asset('assets/explore.png'),
             onPressed: () {},
           ),
         ),
@@ -309,12 +309,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                   decoration: BoxDecoration(
                                       boxShadow: <BoxShadow>[
                                         BoxShadow(
-                                            color: Colors
-                                                .grey, //Color(0xfff05945),
+                                            color: Color.fromARGB(255, 255, 255, 255), //Color(0xfff05945),
                                             offset: const Offset(0, 0),
                                             blurRadius: 5.0),
                                       ],
-                                      color: Colors.white,
+                                      color: Color.fromARGB(255, 245, 244, 244),
                                       borderRadius:
                                           BorderRadius.circular(12.0)),
                                   width: 100,
@@ -356,29 +355,28 @@ class _RegisterPageState extends State<RegisterPage> {
                                     })
                               ]),
                           RaisedButton(
-                              child: Container(
-                                width: MediaQuery.of(context).size.width,
-                                padding: EdgeInsets.symmetric(vertical: 10),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(5)),
-                                  boxShadow: <BoxShadow>[
-                                    BoxShadow(
-                                        color: Colors.grey.shade200,
-                                        offset: Offset(2, 4),
-                                        blurRadius: 5,
-                                        spreadRadius: 2)
-                                  ],
-                                  gradient: LinearGradient(
-                                    begin: Alignment.centerLeft,
-                                    end: Alignment.centerRight,
-                                    colors: [
-                                      Color(0xFF6277FA),
-                                      Color(0xFF08AAEB),
-                                    ],
-                                  ),
-                                ),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        padding: EdgeInsets.symmetric(vertical: 15),
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          boxShadow: <BoxShadow>[
+                            BoxShadow(
+                                // color: Color.fromARGB(255, 255, 255, 255),
+                                // blurRadius: 5,
+                                // spreadRadius: 2
+                            )
+                          ],
+                          gradient: LinearGradient(
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                            colors: [
+                              Color(0xFF6277FA),
+                              Color(0xFF08AAEB),
+                            ],
+                          ),
+                        ),
                                 child: Text(
                                   'Daftar',
                                   style: TextStyle(

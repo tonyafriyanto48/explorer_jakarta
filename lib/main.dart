@@ -1,9 +1,12 @@
+import 'package:explore_jakarta/screen/login_screen.dart';
 import 'package:explore_jakarta/screen/welcome_screen.dart';
 import 'package:explore_jakarta/widget/stategird.dart';
 import 'package:flutter/material.dart';
 import 'package:explore_jakarta/screen/welcome_screen.dart';
 import 'package:explore_jakarta/screen/profile_screen.dart';
 import 'package:explore_jakarta/screen/detail_product.dart';
+import 'package:explore_jakarta/screen/tiket_masuk.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -18,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: welcomepage(),
+      home: TiketMasukPage(),
     );
   }
 }

@@ -1,9 +1,13 @@
+import 'package:explore_jakarta/screen/tiket_print_screen.dart';
+import 'package:explore_jakarta/screen/virtual_account_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:explore_jakarta/screen/home_screen.dart';
 import 'package:explore_jakarta/screen/login_screen.dart';
 import 'package:explore_jakarta/screen/register_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:explore_jakarta/screen/profile_screen.dart';
+
+import 'metode_pembayaran_screen.dart';
 
 class welcomepage extends StatefulWidget {
   const welcomepage();
